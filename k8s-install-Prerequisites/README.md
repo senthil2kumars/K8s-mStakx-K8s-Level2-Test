@@ -79,16 +79,59 @@ A)Steps for the first control plane node
   
  Note: Copy this output to a text file. You will need it later to join control plane and worker nodes to the cluster.
  
- C) Login into other Master node and execute below
+ C)Apply the CNI plugin of your choice: Follow these instructions to install the CNI provider. Make sure the configuration      corresponds to the Pod CIDR specified in the kubeadm configuration file if applicable.
+
+In this example we are using Weave Net:
+    ```
+  $kubectl apply -f "https://cloud.weave.works/k8s/net?k8s-version=$(kubectl version | base64 | tr -d '\n')"
+    ```
+ D) Login into other Master node and execute below
  ```
  $kubeadm join 172.31.87.214:6443 --token fpbfqf.rebejery8kjram12 \
     --discovery-token-ca-cert-hash sha256:6e13976095f5dcc4912eeb7f68a757df06fcf0cfe9051048409ab08044cc399a \
     --control-plane --certificate-key 045e46d1a3410be8c565b32b100c36ad4deffbb66296d326e2691d12256392b2
  ```
- D) Login into Worker nodes and execute below
+ E) Login into Worker nodes and execute below
  ```
  kubeadm join 172.31.87.214:6443 --token fpbfqf.rebejery8kjram12 \
     --discovery-token-ca-cert-hash sha256:6e13976095f5dcc4912eeb7f68a757df06fcf0cfe9051048409ab08044cc399a 
  ```
- 
- 
+ F)Check the nodes staus and POd status
+ ```
+ root@ip-172-31-87-214:~# kubectl get nodes
+NAME               STATUS   ROLES    AGE     VERSION
+ip-172-31-35-11    Ready    master   7h45m   v1.15.1
+ip-172-31-35-208   Ready    master   7h51m   v1.15.1
+ip-172-31-35-224   Ready    <none>   7h43m   v1.15.1
+ip-172-31-40-236   Ready    <none>   7h44m   v1.15.1
+ip-172-31-46-242   Ready    master   7h46m   v1.15.1
+
+root@ip-172-31-87-214:~# kubectl get pod -n kube-system
+NAME                                       READY   STATUS    RESTARTS   AGE
+coredns-5c98db65d4-6ccsr                   1/1     Running   1          7h52m
+coredns-5c98db65d4-vd6k7                   1/1     Running   1          7h52m
+etcd-ip-172-31-35-11                       1/1     Running   1          7h46m
+etcd-ip-172-31-35-208                      1/1     Running   1          7h51m
+etcd-ip-172-31-46-242                      1/1     Running   1          7h47m
+kube-apiserver-ip-172-31-35-11             1/1     Running   1          7h46m
+kube-apiserver-ip-172-31-35-208            1/1     Running   1          7h51m
+kube-apiserver-ip-172-31-46-242            1/1     Running   1          7h47m
+kube-controller-manager-ip-172-31-35-11    1/1     Running   1          7h46m
+kube-controller-manager-ip-172-31-35-208   1/1     Running   2          7h51m
+kube-controller-manager-ip-172-31-46-242   1/1     Running   1          7h47m
+kube-proxy-5bnrs                           1/1     Running   1          7h52m
+kube-proxy-b6s5p                           1/1     Running   1          7h45m
+kube-proxy-brqzj                           1/1     Running   1          7h44m
+kube-proxy-dnwqr                           1/1     Running   1          7h46m
+kube-proxy-dwdfk                           1/1     Running   1          7h47m
+kube-scheduler-ip-172-31-35-11             1/1     Running   1          7h46m
+kube-scheduler-ip-172-31-35-208            1/1     Running   2          7h51m
+kube-scheduler-ip-172-31-46-242            1/1     Running   1          7h47m
+tiller-deploy-56c686464b-swncf             1/1     Running   1          7h32m
+weave-net-6p89k                            2/2     Running   3          7h45m
+weave-net-7tkfk                            2/2     Running   3          7h50m
+weave-net-9z899                            2/2     Running   3          7h46m
+weave-net-kgx86                            2/2     Running   4          7h47m
+weave-net-qn4mw                            2/2     Running   3          7h44m
+
+```
