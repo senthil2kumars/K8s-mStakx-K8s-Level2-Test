@@ -3,13 +3,14 @@
 
 Solution:
 I have setup the Highly Available clusters with kubeadm. [Install K8s Cluster](https://github.com/senthil2kumars/K8s-mStakx-Level2-Test/tree/master/k8s-install-Prerequisites)
+
 ![Clusterdetails](HA-Kubeadm Cluster.jpg)
 
 2.	Create a CI/CD pipeline using Jenkins (or a CI tool of your choice) outside Kubernetes cluster (not as a pod inside Kubernetes cluster).
 
 Solution: I have setup Jenkins server on AWS-Ubuntu 16.04
  The Jenkins dashboard :
- ![Jenkins](Jenkins-dashboard.png)
+![Jenkins](Jenkins-dashboard.png)
 
 3.	Create a development namespace.
 
