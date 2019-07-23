@@ -46,7 +46,8 @@ A)Steps for the first control plane node
     EOF
   ```
  B)Initialize the control plane:
-    ```
+    
+ ```
     $kubeadm init --config=kubeadm-config.yaml --upload-certs
     .
     .
@@ -74,6 +75,5 @@ A)Steps for the first control plane node
     kubeadm join 172.31.87.214:6443 --token fpbfqf.rebejery8kjram12 \
     --discovery-token-ca-cert-hash sha256:6e13976095f5dcc4912eeb7f68a757df06fcf0cfe9051048409ab08044cc399a 
 ```
-    Note: Copy this output to a text file. You will need it later to join control plane and worker nodes to the cluster.
     
   
