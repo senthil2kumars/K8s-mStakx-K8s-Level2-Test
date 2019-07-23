@@ -1,0 +1,28 @@
+- name: initialize the cluster
+  shell: kubeadm init --pod-network-cidr=192.168.0.0/16
+  register: output
+  ignore_errors: yes
+    
+- name: storing token
+  local_action: copy content="{{ output.stdout }}" dest="/etc/ansible/token_details"
+
+- name: create .kube directory
+  file:
+    path: /root/.kube
+    state: directory
+    mode: 0755
+
+- name: copy admin.conf to user's kube config
+  copy:
+    src: /etc/kubernetes/admin.conf
+    dest: /root/.kube/config
+    remote_src: yes
+
+- name: install Pod network
+  shell: kubectl apply -f https://docs.projectcalico.org/v3.7/manifests/calico.yaml
+
+- name: print cluster status
+  shell: kubectl get nodes
+  register: output
+- debug:
+    var: output.stdout_lines

@@ -1,0 +1,60 @@
+---
+# tasks file for kube-dashboard
+- name: Installing the dashboard
+  shell: "kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/v2.0.0-beta1/aio/deploy/recommended.yaml"
+  register: dashboard
+- debug:
+     var: dashboard.stdout_lines
+- name: Checking the node status
+  shell: "kubectl get nodes"
+  register: nodes
+- debug:
+     var: nodes.stdout_lines
+- name: Cheking the Master node component
+  shell: "kubectl get componentstatuses"
+  register: component
+- debug:
+     var: component.stdout_lines
+- name: Checking all pod details
+  shell: "kubectl get pod --all-namespaces"
+  register: pod
+- debug:
+     var: pod.stdout_lines
+
+- name: copy the dashboard service yaml file to master node
+  copy:
+    src: dashboard-service.yaml 
+    dest: /root/.kube/dashboard-service.yaml
+
+- name: exposing the Dashboard service
+  shell: "kubectl apply -f /root/.kube/dashboard-service.yaml -n kubernetes-dashboard"
+
+- name: copy the user clusterrolebinding service yaml file to master node
+  copy:
+    src: clusterrolebinding.yaml
+    dest: /root/.kube/clusterrolebinding.yaml
+
+- name: create admin user clusterrolebinding
+  shell: "kubectl apply -f /root/.kube/clusterrolebinding.yaml -n kubernetes-dashboard"
+
+- name: copy the serviceaccount yaml file to master node
+  copy:
+    src: serviceaccount-admin.yaml
+    dest: /root/.kube/serviceaccount-admin.yaml
+
+- name: creating admin user serviceaccount
+  shell: "kubectl apply -f /root/.kube/serviceaccount-admin.yaml -n kubernetes-dashboard"
+
+- name: Token to be used to login into Dashboard
+  shell: "kubectl -n kubernetes-dashboard describe secret $(kubectl -n kubernetes-dashboard get secret | grep admin-user | awk '{print $1}')"
+  register: token
+- debug:
+     var: token.stdout_lines
+- name: Fetching the dashboard IP & Port
+  shell: "export PORT=`kubectl get svc kubernetes-dashboard -n kubernetes-dashboard -o yaml|grep nodePort|awk '{print $3}'`;export HOSTNAME=`curl http://169.254.169.254/latest/meta-data/public-ipv4`"
+- name: Access the dasboard with below IP:Port
+  shell: "echo https://$HOSTNAME:$PORT"
+  register: dashboard
+- debug:
+    var: dashboard.stdout_lines
+

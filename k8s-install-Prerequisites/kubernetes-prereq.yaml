@@ -1,0 +1,6 @@
+- hosts: allservers 
+  remote_user: ubuntu
+  become: true
+  become_method: sudo
+  roles:
+    - kube-prerequisite

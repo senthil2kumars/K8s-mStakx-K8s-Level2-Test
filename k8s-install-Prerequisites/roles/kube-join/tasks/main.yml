@@ -1,0 +1,5 @@
+- name: Copy the join token to worker
+  copy: src=join-token dest=/tmp/join-command.sh mode=0777
+
+- name: Join the node to cluster
+  command: sh /tmp/join-command.sh

@@ -1,0 +1,19 @@
+- hosts: allservers
+  remote_user: ubuntu
+  become: true
+  become_method: sudo
+  gather_facts: false
+  tasks:
+    - name: Reset kubeadm command
+      shell: "kubeadm reset --force"
+    - name: Refresh the Iptables
+      shell: iptables -F && iptables -t nat -F && iptables -t mangle -F && iptables -X
+- hosts: masternode
+  remote_user: ubuntu
+  become: true
+  become_method: sudo
+  gather_facts: false
+  tasks:
+#      shell: /var/lib/etcd
+    - file: path=/var/lib/etcd state=absent
+    - file: path=/var/lib/etcd state=directory
