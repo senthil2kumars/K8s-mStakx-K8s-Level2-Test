@@ -52,13 +52,14 @@ Solution: I have created Monitoring namespace
 
 Solution:
 I have setup Prometheus using the helm chart. [Install Prometheus on k8s](https://github.com/senthil2kumars/K8s-mStakx-Level2-Test/tree/master/prometheus).
-
+![Prometheus Dashboard](Prometheus-Dashboard.png)
 
 9.	Create a dashboard using Grafana to help visualize the Node/Container/API Server etc. metrices from Prometheus server. Optionally create a custom dashboard on Grafana.
 
+
 Solution:
 I have setup Grafana using the helm chart. [Install Grafana on k8s](https://github.com/senthil2kumars/K8s-mStakx-Level2-Test/tree/master/grafana) and imported custom dashboard using My-Dashboard-1563776879264.json file.
-
+![Grafana Dashboard](grafana-dashboard.png)
 10.	Setup log analysis using Elasticsearch, Fluentd (or Filebeat), Kibana.
 Solution:
 I have setup EFK log analysis stack using the helm chart. [Install EFK on k8s](https://github.com/senthil2kumars/K8s-mStakx-Level2-Test/tree/master/elastic-stack).
