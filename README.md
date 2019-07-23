@@ -51,12 +51,30 @@ Solution: I have created Monitoring namespace
 8.	Setup Prometheus (in monitoring namespace) for gathering host/container metrics along with health check status of the application.
 
 Solution:
-I have setup Prometheus using the helm chart. [Install Prometheus on k8s](https://github.com/senthil2kumars/K8s-mStakx-Level2-Test/tree/master/k8s-install-Prerequisites).
+I have setup Prometheus using the helm chart. [Install Prometheus on k8s](https://github.com/senthil2kumars/K8s-mStakx-Level2-Test/tree/master/prometheus).
 
 
-9.	Create a dashboard using Grafana to help visualize the Node/Container/API Server etc. metrices from Prometheus server. Optionally create a custom dashboard on Grafana
+9.	Create a dashboard using Grafana to help visualize the Node/Container/API Server etc. metrices from Prometheus server. Optionally create a custom dashboard on Grafana.
+
+Solution:
+I have setup Grafana using the helm chart. [Install Grafana on k8s](https://github.com/senthil2kumars/K8s-mStakx-Level2-Test/tree/master/grafana) and imported custom dashboard using My-Dashboard-1563776879264.json file.
+
 10.	Setup log analysis using Elasticsearch, Fluentd (or Filebeat), Kibana.
+Solution:
+I have setup EFK log analysis stack using the helm chart. [Install EFK on k8s](https://github.com/senthil2kumars/K8s-mStakx-Level2-Test/tree/master/elastic-stack).
+
 11.	Demonstrate Blue/Green and Canary deployment for the application (For e.g. Change the background color or font in the new version etc.,)
+
+Solution:
+ Deployed application using helm chart through CI/CD pipeline.
+
+ I have changed the font background clour change and tested.
+ Through the Jenkins pipline, 
+
+Before:
+
+After:
+ 
 12.	Write a wrapper script (or automation mechanism of your choice) which does all the steps above.
 13.	Document the whole process in a README file at the root of your repo. Mention any pre-requisites in the README.
 
