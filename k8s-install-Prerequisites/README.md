@@ -29,3 +29,51 @@ See the [Configure K8s prerequesties](https://github.com/senthil2kumars/K8s-mSta
         $ansible-playbook kubernetes-prereq.yaml
     ```
   Result: Ansible will configure required prerequesties on a cluster node.
+
+3. Install the Highly Available clusters with kubeadm on AWS ubuntu 16.04 Instance. See the [Creating Highly Available clusters with kubeadm](https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/high-availability/) 
+
+A)Steps for the first control plane node
+
+  On the first control plane node, create a configuration file called kubeadm-config.yaml:
+  
+  
+  ```
+    cat >> kubeadm-config.yaml
+    apiVersion: kubeadm.k8s.io/v1beta2
+    kind: ClusterConfiguration
+    kubernetesVersion: stable
+    controlPlaneEndpoint: "LOAD_BALANCER_IP:6443"
+    EOF
+  ```
+ B)Initialize the control plane:
+    ```
+    $kubeadm init --config=kubeadm-config.yaml --upload-certs
+    .
+    .
+    .
+    mkdir -p $HOME/.kube
+    sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+    sudo chown $(id -u):$(id -g) $HOME/.kube/config
+
+    You should now deploy a pod network to the cluster.
+    Run "kubectl apply -f [podnetwork].yaml" with one of the options listed at:
+    https://kubernetes.io/docs/concepts/cluster-administration/addons/
+
+    You can now join any number of the control-plane node running the following command on each as root:
+
+    kubeadm join 172.31.87.214:6443 --token fpbfqf.rebejery8kjram12 \
+    --discovery-token-ca-cert-hash sha256:6e13976095f5dcc4912eeb7f68a757df06fcf0cfe9051048409ab08044cc399a \
+    --control-plane --certificate-key 045e46d1a3410be8c565b32b100c36ad4deffbb66296d326e2691d12256392b2
+
+    Please note that the certificate-key gives access to cluster sensitive data, keep it secret!
+    As a safeguard, uploaded-certs will be deleted in two hours; If necessary, you can use 
+    "kubeadm init phase upload-certs --upload-certs" to reload certs afterward.
+
+    Then you can join any number of worker nodes by running the following on each as root:
+
+    kubeadm join 172.31.87.214:6443 --token fpbfqf.rebejery8kjram12 \
+    --discovery-token-ca-cert-hash sha256:6e13976095f5dcc4912eeb7f68a757df06fcf0cfe9051048409ab08044cc399a 
+```
+    Note: Copy this output to a text file. You will need it later to join control plane and worker nodes to the cluster.
+    
+  
