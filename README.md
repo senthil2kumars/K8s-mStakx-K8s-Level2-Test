@@ -3,6 +3,7 @@
 
 Solution:
 I have setup the Highly Available clusters with kubeadm. [Install K8s Cluster](https://github.com/senthil2kumars/K8s-mStakx-Level2-Test/tree/master/k8s-install-Prerequisites).
+![Cluster Details](HA-Kubeadm Cluster.jng)
 
 2.	Create a CI/CD pipeline using Jenkins (or a CI tool of your choice) outside Kubernetes cluster (not as a pod inside Kubernetes cluster).
 
@@ -65,7 +66,7 @@ I have setup Grafana using the helm chart. [Install Grafana on k8s](https://gith
 10.	Setup log analysis using Elasticsearch, Fluentd (or Filebeat), Kibana.
 
 Solution:
-I have setup EFK log analysis stack using the helm chart. [Install EFK on k8s](https://github.com/senthil2kumars/K8s-mStakx-Level2-Test/tree/master/elastic-stack).
+I have setup EFK log analysis stack using the helm chart. [Install EFK on k8s](https://github.com/senthil2kumars/K8s-mStakx-Level2-Test/tree/master/elastic-stack)
 ![EFK Dashboard](EFK.png)
 
 11.	Demonstrate Blue/Green and Canary deployment for the application (For e.g. Change the background color or font in the new version etc.,)
