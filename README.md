@@ -67,7 +67,7 @@ I have setup Grafana using the helm chart. [Install Grafana on k8s](https://gith
 
 Solution:
 I have setup EFK log analysis stack using the helm chart. [Install EFK on k8s](https://github.com/senthil2kumars/K8s-mStakx-Level2-Test/tree/master/elastic-stack)
-![EFK Dashboard](EFK-Dashboard.png)
+![EFK Dashboard](EKF-Dashboard.png)
 
 11.	Demonstrate Blue/Green and Canary deployment for the application (For e.g. Change the background color or font in the new version etc.,)
 
