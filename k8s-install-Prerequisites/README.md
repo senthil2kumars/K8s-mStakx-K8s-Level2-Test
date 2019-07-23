@@ -77,3 +77,18 @@ A)Steps for the first control plane node
 ```
     
   
+ Note: Copy this output to a text file. You will need it later to join control plane and worker nodes to the cluster.
+ 
+ C) Login into other Master node and execute below
+ ```
+ $kubeadm join 172.31.87.214:6443 --token fpbfqf.rebejery8kjram12 \
+    --discovery-token-ca-cert-hash sha256:6e13976095f5dcc4912eeb7f68a757df06fcf0cfe9051048409ab08044cc399a \
+    --control-plane --certificate-key 045e46d1a3410be8c565b32b100c36ad4deffbb66296d326e2691d12256392b2
+ ```
+ D) Login into Worker nodes and execute below
+ ```
+ kubeadm join 172.31.87.214:6443 --token fpbfqf.rebejery8kjram12 \
+    --discovery-token-ca-cert-hash sha256:6e13976095f5dcc4912eeb7f68a757df06fcf0cfe9051048409ab08044cc399a 
+ ```
+ 
+ 
