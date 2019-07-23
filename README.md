@@ -3,6 +3,7 @@
 
 Solution:
 I have setup the Highly Available clusters with kubeadm. [Install K8s Cluster](https://github.com/senthil2kumars/K8s-mStakx-Level2-Test/tree/master/k8s-install-Prerequisites).
+
 2.	Create a CI/CD pipeline using Jenkins (or a CI tool of your choice) outside Kubernetes cluster (not as a pod inside Kubernetes cluster).
 
 Solution: I have setup Jenkins server on AWS-Ubuntu 16.04
@@ -10,6 +11,7 @@ Solution: I have setup Jenkins server on AWS-Ubuntu 16.04
  ![Jenkins](Jenkins-dashboard.png)
 
 3.	Create a development namespace.
+
 Solution:
 ```
     Created Development namespace:
@@ -56,13 +58,15 @@ I have setup Prometheus using the helm chart. [Install Prometheus on k8s](https:
 
 9.	Create a dashboard using Grafana to help visualize the Node/Container/API Server etc. metrices from Prometheus server. Optionally create a custom dashboard on Grafana.
 
-
 Solution:
 I have setup Grafana using the helm chart. [Install Grafana on k8s](https://github.com/senthil2kumars/K8s-mStakx-Level2-Test/tree/master/grafana) and imported custom dashboard using My-Dashboard-1563776879264.json file.
 ![Grafana Dashboard](grafana-dashboard.png)
+
 10.	Setup log analysis using Elasticsearch, Fluentd (or Filebeat), Kibana.
+
 Solution:
 I have setup EFK log analysis stack using the helm chart. [Install EFK on k8s](https://github.com/senthil2kumars/K8s-mStakx-Level2-Test/tree/master/elastic-stack).
+![EFK Dashboard](EFK.png)
 
 11.	Demonstrate Blue/Green and Canary deployment for the application (For e.g. Change the background color or font in the new version etc.,)
 
