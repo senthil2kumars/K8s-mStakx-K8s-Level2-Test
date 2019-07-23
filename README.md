@@ -3,7 +3,7 @@
 
 Solution:
 I have setup the Highly Available clusters with kubeadm. [Install K8s Cluster](https://github.com/senthil2kumars/K8s-mStakx-Level2-Test/tree/master/k8s-install-Prerequisites)
- ![Cluster details](HA-Kubeadm Cluster.jpg)
+![Clusterdetails](HA-Kubeadm Cluster.jpg)
 
 2.	Create a CI/CD pipeline using Jenkins (or a CI tool of your choice) outside Kubernetes cluster (not as a pod inside Kubernetes cluster).
 
